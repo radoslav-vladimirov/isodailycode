@@ -2,9 +2,8 @@ const Koa = require('koa')
 const app = new Koa()
 
 const main = ctx => {
-    const urls = require('./data')
-    const rand = Math.floor(Math.random()*urls.length)
-    ctx.response.redirect(urls[rand])
+    const { getArticle } = require('./controllers/articles.js')
+    ctx.response.redirect(getArticle())
 }
 
 app.use(main)
