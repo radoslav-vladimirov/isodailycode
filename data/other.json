@@ -1,4 +1,7 @@
 {
-    "probability": 50,
-    "articles": []
+    "probability": 25,
+    "articles": [
+        "https://www.codewars.com/",
+        "https://www.codingame.com/"
+    ]
 }
