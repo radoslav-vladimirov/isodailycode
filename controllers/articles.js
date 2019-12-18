@@ -1,32 +1,39 @@
-const chance = require('chance').Chance()
-const axios = require('axios')
+const chance = require('chance').Chance();
+const axios = require('axios');
 
-const js = require('../data/javascript.json')
-const react = require('../data/react.json')
-const css = require('../data/css.json')
-const sfcc = require('../data/sfcc.json')
-const other = require('../data/other.json')
+const topics = ['javascript', 'react', 'css', 'sfcc', 'other'];
+const getAvailableTopics = topics =>
+  topics.map(topic => require(`../data/${topic}.json`)).filter(topic => topic.articles.length);
 
-const availableTopics = [css, js, other, react, sfcc].filter(topic => topic.articles.length)
-const weights = availableTopics.map(topic=> topic.probability)
+const availableTopics = getAvailableTopics(topics);
+const weights = availableTopics.map(topic => topic.probability);
 
-const randomArticle = async () => {
-    const allAvailableArticles = chance.weighted(availableTopics, weights).articles
-    const selectedArticleIndex = chance.integer({ min: 0, max: (allAvailableArticles.length-1) })
-    const selectedArticle = allAvailableArticles[selectedArticleIndex]
+const getRandomArticle = () => {
+  const allAvailableArticles = chance.weighted(availableTopics, weights).articles;
+  const selectedArticleIndex = chance.integer({ min: 0, max: allAvailableArticles.length - 1 });
+  return allAvailableArticles[selectedArticleIndex];
+};
 
-    try {
-        const { status } = await axios.head(selectedArticle)
-        if(status >= 200 && status < 300) {
-            return selectedArticle
-        } else {
-            return randomArticle()
-        }
-    } catch (e) {
-        return randomArticle()
+const getArticlesToCheck = () => {
+  const ARTICLES_TO_CHECK = 3;
+  return new Array(ARTICLES_TO_CHECK).fill().map(getRandomArticle);
+};
+
+const getArticle = async () => {
+  const articlesToCheck = getArticlesToCheck();
+
+  try {
+    const articlesChecked = await Promise.all(articlesToCheck.map(axios.head));
+    const selectedArticle = articlesChecked.filter(({ status }) => status >= 200 && status < 300).pop();
+
+    if (selectedArticle) {
+      return selectedArticle.config.url;
     }
-}
 
-module.exports = {
-    "getArticle": randomArticle
-}
+    getArticle();
+  } catch (e) {
+    getArticle();
+  }
+};
+
+module.exports = { getArticle };
