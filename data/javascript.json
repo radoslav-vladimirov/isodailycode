@@ -379,6 +379,17 @@
         "https:\/\/javascript.christmas\/2019\/21",
         "https:\/\/javascript.christmas\/2019\/22",
         "https:\/\/javascript.christmas\/2019\/23",
-        "https:\/\/javascript.christmas\/2019\/24"
+        "https:\/\/javascript.christmas\/2019\/24",
+        "https:\/\/github.com\/ryanmcdermott\/clean-code-javascript#variables",
+        "https:\/\/github.com\/ryanmcdermott\/clean-code-javascript#functions",
+        "https:\/\/github.com\/ryanmcdermott\/clean-code-javascript#objects-and-data-structures",
+        "https:\/\/github.com\/ryanmcdermott\/clean-code-javascript#classes",
+        "https:\/\/github.com\/ryanmcdermott\/clean-code-javascript#solid",
+        "https:\/\/github.com\/ryanmcdermott\/clean-code-javascript#testing",
+        "https:\/\/github.com\/ryanmcdermott\/clean-code-javascript#concurrency",
+        "https:\/\/github.com\/ryanmcdermott\/clean-code-javascript#error-handling",
+        "https:\/\/github.com\/ryanmcdermott\/clean-code-javascript#formatting",
+        "https:\/\/github.com\/ryanmcdermott\/clean-code-javascript#comments",
+        "https:\/\/github.com\/ryanmcdermott\/clean-code-javascript#translation"
     ]
 }
